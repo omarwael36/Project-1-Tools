@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Stateless
-//@Table(name="Runners")
 @Entity
 public class Runner {
 	@Id
@@ -26,7 +25,6 @@ public class Runner {
 	@JoinColumn(name="orderID")
 	private Order order;
 	
-	//@Column(name="RunnerName")
 	public String getName() {
 		return name;
 	}
@@ -35,7 +33,6 @@ public class Runner {
 		this.name = name;
 	}
 
-	//@Column(name="RunnerStatus")
 	public String getStatus() {
 		return status;
 	}
@@ -44,7 +41,6 @@ public class Runner {
 		this.status = status;
 	}
 
-	//@Column(name="Delivery_fees")
 	public double getDelivery_fees() {
 		return delivery_fees;
 	}
