@@ -1,46 +1,60 @@
 package Entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Stateless
-//@Table(name="Restaurants")
+
 @Entity
-public class Restaurant {
+public class Restaurant implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int Id;
 	
 	protected String name;
 	
-	protected int OwnerId;
+	//protected int OwnerId;
+	@Lob
+	protected ArrayList<Meal> ListOfMeals = new ArrayList<Meal>();
 	
-	@OneToMany(mappedBy="restaurant" , fetch = FetchType.EAGER)
-	private Set<Meal> meals;
+	@OneToMany(mappedBy="restaurant")
+	private List<Meal> meals;
 	
-	@OneToOne(optional=false, mappedBy="restaurant")
+	@OneToOne
+	@JoinColumn(name="OwnerId")
 	private User user;
 	
-	@OneToMany(mappedBy="restaurant" , fetch = FetchType.EAGER)
-	private Set<Order> orders;
-	
-	//@OneToMany(mappedBy="restaurant")
-	//private ArrayList<Order> order = new ArrayList<Order>();
-	
+	@OneToMany(mappedBy="restaurant")
+	private Set<Orders> orders;
+
 	public Restaurant() {
 		
 	}
 
-	protected ArrayList<Meal> ListOfMeals = new ArrayList<Meal>();
+
+	public Restaurant(String name, ArrayList<Meal> meals) {
+		this.name = name;
+		this.meals = meals;
+	}
+
+
 	//@Column(name="RestaurantName")
 	public String getName() {
 		return name;
@@ -49,21 +63,28 @@ public class Restaurant {
 	public void setName(String name) {
 		this.name = name;
 	}
-	//@Column(name="OwnerId")
-	public int getOwnerId() {
-		return OwnerId;
+
+
+	public int getId() {
+		return Id;
 	}
 
-	public void setOwnerId(int ownerId) {
-		OwnerId = ownerId;
+
+
+	public void setId(int id) {
+		Id = id;
 	}
-	//@Column(name="ListOfMeal")
+
+
 	public ArrayList<Meal> getListOfMeals() {
 		return ListOfMeals;
 	}
 
+
 	public void setListOfMeals(ArrayList<Meal> listOfMeals) {
 		ListOfMeals = listOfMeals;
 	}
+
+
 	
 }
