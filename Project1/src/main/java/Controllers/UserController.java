@@ -1,6 +1,5 @@
 package Controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -15,7 +14,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import Entities.Meal;
 import Entities.Restaurant;
 import Entities.User;
 
@@ -68,28 +66,7 @@ public class UserController {
 	@POST
 	@Path("CreateMenu")
 	public String CreateMenu(Restaurant restaurant) {
-		
-//		Restaurant restaurant = new Restaurant();
-//		System.out.println(ira.getMeals().size());
-//		System.out.println(ira.getMeals());
-//		if(ira != null) {
-//			try {
-//				for(int i = 0;i < ira.getMeals().size();i++) {
-//				
-//					restaurant.getMeals().add(ira.getMeals().get(i));
-//				}
-//				em.persist(restaurant);
-//				return "Menu created successfully !!";
-//			}
-//			
-//			catch(Exception e){
-//				throw e;
-//			}
-//		}
-//		else {
-//			return "null";
-//		}
-		//restaurant.setOwnerId(user.getId());
+
 		em.persist(restaurant);
 		return "Menu created successfully !!";
 	}
