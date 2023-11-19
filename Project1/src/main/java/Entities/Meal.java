@@ -1,5 +1,7 @@
 package Entities;
 
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,45 +13,40 @@ import javax.persistence.ManyToOne;
 @Stateless
 //@Table(name="Meals")
 @Entity
-public class Meal {
+public class Meal implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int Id;
 	protected String name;
 	protected double price;
-	protected int fk_restaurantId;
+
 	
 	@ManyToOne
-	@JoinColumn(name="restaurantID")
+	@JoinColumn(name="fk_restaurantId")
 	private Restaurant restaurant;
 	
 	@ManyToOne
 	@JoinColumn(name="orderID")
-	private Order order;
+	private Orders order;
 	
 	public Meal() {
 		
 	}
-	//@Column(name="MealName")
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	//@Column(name="MealPrice")
 	public double getPrice() {
 		return price;
 	}
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	//@Column(name="Fk_restaurantId")
-	public int getFk_restaurantId() {
-		return fk_restaurantId;
-	}
-	public void setFk_restaurantId(int fk_restaurantId) {
-		this.fk_restaurantId = fk_restaurantId;
-	}
-	
+
 }
